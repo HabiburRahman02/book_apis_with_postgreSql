@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const port = 3001
 
+// middleware
+app.use(express.json())
+
 app.get('/', (req, res) => {
     res.send('Book apis is running!')
 })
@@ -29,3 +32,13 @@ app.get('/books/:id', async (req, res) => {
         console.log(error);
     }
 })
+
+// CREATE
+app.post('/books', async (req, res) => {
+    try {
+        const {name,des} = req.body;
+        res.status(201).json({ message: `Post data Name: ${name} & Des: ${des}` })
+    } catch (error) {
+        console.log(error);
+    }
+}) 
