@@ -42,3 +42,25 @@ app.post('/books', async (req, res) => {
         console.log(error);
     }
 }) 
+
+// DELETE
+app.delete('/books/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+         res.status(200).json({ message: `Deleted this ID: ${id}` })
+     } catch (error) {
+         console.log(error);
+     }
+}) 
+
+// UPDATE
+app.put('/books/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+        const {name,des} = req.body;
+        res.status(201).json({ message: `Update Book Name: ${name} & Des: ${des} & Id: ${id}` })
+    } catch (error) {
+        console.log(error);
+    }
+}) 
+
