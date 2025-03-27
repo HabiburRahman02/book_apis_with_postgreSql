@@ -17,3 +17,8 @@ SELECT * FROM book;
 SELECT * FROM book WHERE id = $1;
 
 DELETE FROM book WHERE id = $1;
+
+UPDATE book 
+SET name = $1, description = $2 
+WHERE id = $3 
+RETURNING *

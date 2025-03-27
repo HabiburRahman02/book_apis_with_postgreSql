@@ -65,7 +65,14 @@ app.put('/books/:id', async (req, res) => {
     try {
         const { id } = req.params
         const { name, des } = req.body;
-        res.status(201).json({ message: `Update Book Name: ${name} & Des: ${des} & Id: ${id}` })
+        const query = `
+        UPDATE book 
+        SET name = $1, des = $2 
+        WHERE id = $3 
+        RETURNING *;
+    `;
+        const updatedBook = await pool.query(query, [name, des, id])
+        res.status(201).json({ message: `Updated Book`, data: updatedBook.rows })
     } catch (error) {
         console.log(error);
     }
