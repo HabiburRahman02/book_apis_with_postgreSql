@@ -29,7 +29,8 @@ app.get('/books', async (req, res) => {
 app.get('/books/:id', async (req, res) => {
     try {
         const { id } = req.params
-        res.status(200).json({ message: `get a single book data: ${id}` })
+        const singleBook = await pool.query("SELECT * FROM book WHERE id = $1", [id])
+        res.status(200).json({ message: `get a single book data`, data: singleBook.rows })
     } catch (error) {
         console.log(error);
     }
@@ -41,7 +42,7 @@ app.post('/books', async (req, res) => {
         const { name, des } = req.body;
         const id = uuidv4()
         const newBook = await pool.query("INSERT INTO book (id,name,des) VALUES ($1, $2, $3) RETURNING *", [id, name, des])
-        res.status(201).json({ message: 'Book is created', data: newBook.rows})
+        res.status(201).json({ message: 'Book is created', data: newBook.rows })
     } catch (error) {
         console.log(error);
         res.json(error)
@@ -52,7 +53,8 @@ app.post('/books', async (req, res) => {
 app.delete('/books/:id', async (req, res) => {
     try {
         const { id } = req.params
-        res.status(200).json({ message: `Deleted this ID: ${id}` })
+        const deletedBook = await pool.query("DELETE FROM book WHERE id = $1", [id])
+        res.status(200).json({ message: `Deleted this`, data: deletedBook.rows })
     } catch (error) {
         console.log(error);
     }
