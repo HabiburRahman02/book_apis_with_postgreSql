@@ -22,3 +22,17 @@ UPDATE book
 SET name = $1, description = $2 
 WHERE id = $3 
 RETURNING *
+
+
+
+-- UPDATE CARS
+UPDATE cars
+SET color = 'red'
+WHERE brand = 'volvo';
+
+
+CREATE TABLE company (
+    name VARCHAR(20),
+    location VARCHAR(30),
+    employee VARCHAR(255)
+);
