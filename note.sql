@@ -53,3 +53,65 @@ SELECT DISTINCT  country  FROM person ORDER BY country;
 
 -- condition onusare data get and multiple condition
 SELECT * FROM person  WHERE country = 'China' AND gender = 'Male';
+
+SELECT * FROM person  WHERE country = 'China' OR gender = 'Male';
+
+
+-- Comparison operator
+SELECT 1 < 3
+SELECT 1 <> 3    --check not equal
+
+
+-- LIMIT use kore amra nidristo sokhok data show korate pari
+SELECT * FROM person LIMIT 10;
+
+
+-- OFFSET didristo sokkhon data skip kore porer gulo show koranor jonno use kori
+SELECT * FROM person OFFSET 10 LIMIT 5;
+
+-- NOTE: Best practice --> use FETCH replace LIMIT
+SELECT * FROM person OFFSET 10 FETCH FIRST 10 ROW ONLY;
+
+-- OR  & IN
+SELECT * FROM person WHERE country = 'China'OR country = 'Japan' OR country = 'Peru';
+
+-- when using IN
+SELECT * FROM person WHERE country IN('China', 'Tunisia', 'Peru', 'Japan');
+
+
+-- BETWEEN compare kore data pawar jonno
+SELECT * FROM person WHERE date_of_birth BETWEEN '2010-02-07' AND '2014-02-07'; 
+
+
+-- LIKE & ILIKE ()
+SELECT * FROM person WHERE email LIKE '%.com';
+
+SELECT * FROM person WHERE country ILIKE 'china';
+
+
+-- GROUP BY 
+SELECT country, COUNT(*) FROM person GROUP BY country ORDER BY country;
+
+
+-- GROUP BY HAVING (use for Extra filtering)
+SELECT country, COUNT(*) FROM person GROUP BY country HAVING COUNT(*) > 5 ORDER BY country;
+
+
+-- MIN, MAX, AVG
+SELECT MIN(price) FROM car;
+SELECT MAX(price) FROM car;
+SELECT AVG(price) FROM car;
+SELECT ROUND(AVG(price), 2) FROM car;
+SELECT make, model, SUM(price) FROM car GROUP BY make, model;
+
+
+-- Basics of Arithmetic Operators (+, -, *, /)
+SELECT 10 + 5;
+SELECT 10 - 5;
+SELECT 10 * 5;
+SELECT 10 / 5;
+SELECT 10!;
+SELECT 3^3;
+SELECT 10 + 5 * 6;   
+
+
